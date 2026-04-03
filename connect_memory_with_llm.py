@@ -35,7 +35,7 @@ def build_rag_chain():
     db = FAISS.load_local(DB_FAISS_PATH, embeddings, allow_dangerous_deserialization=True)
 
     llm = ChatGroq(
-        model="llama-3.1-70b-versatile",
+        model="llama-3.3-70b-versatile",
         temperature=0.1,
         max_tokens=512,
         api_key=GROQ_API_KEY,
