@@ -36,10 +36,10 @@ class QuestionRequest(BaseModel):
 
 from fastapi.responses import HTMLResponse
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
 async def serve_ui():
-    with open("madar-chatbot.html", "r", encoding="utf-8") as f:
-        return f.read()
+    file_path = os.path.join(os.path.dirname(__file__), "madar-chatbot.html")
+    return FileResponse(file_path)
 
 
 @app.post("/chat")
