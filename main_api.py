@@ -34,14 +34,12 @@ class QuestionRequest(BaseModel):
     question: str
 
 
-@app.get("/")
-async def root():
-    """Health check endpoint."""
-    return {
-        "status": "ok",
-        "service": "Madar Chatbot API",
-        "rag_ready": rag_chain is not None,
-    }
+from fastapi.responses import HTMLResponse
+
+@app.get("/", response_class=HTMLResponse)
+async def serve_ui():
+    with open("madar-chatbot.html", "r", encoding="utf-8") as f:
+        return f.read()
 
 
 @app.post("/chat")
