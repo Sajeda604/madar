@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from langchain_huggingface import HuggingFaceEndpointEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_groq import ChatGroq
-from langchain.chains import RetrievalQA, create_retrieval_chain
+from langchain.chains import  create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.prompts import PromptTemplate
 
@@ -195,7 +195,7 @@ def main():
 
                 # استخراج النص الفعلي فقط
                 if isinstance(result, dict):
-                    answer = result.get("output_text") or result.get("text")
+                    answer = result.get("answer") or result.get("output_text") or result.get("text")
                 elif hasattr(result, "content"):
                     answer = result.content
                 else:
