@@ -1,5 +1,6 @@
 import os
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
@@ -34,12 +35,14 @@ class QuestionRequest(BaseModel):
     question: str
 
 
-from fastapi.responses import HTMLResponse
-
 @app.get("/")
-async def serve_ui():
-    file_path = os.path.join(os.path.dirname(__file__), "madar-chatbot.html")
-    return FileResponse(file_path)
+async def root():
+    """Health check endpoint."""
+    return {
+        "status": "ok",
+        "service": "Madar Chatbot API",
+        "rag_ready": rag_chain is not None,
+    }
 
 
 @app.post("/chat")
