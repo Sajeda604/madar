@@ -21,7 +21,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 # ───────────────────────────────────────────────────────────────────────────────
+from create_memory_for_llm import build_faiss_vectorstore
 
+# Build vectorstore on startup if not exists
+try:
+    build_faiss_vectorstore()
+    print("✅ Vectorstore ready.")
+except Exception as e:
+    print(f"⚠️ Vectorstore build error: {e}")
 # Initialize RAG chain once at startup
 try:
     rag_chain = build_rag_chain()
