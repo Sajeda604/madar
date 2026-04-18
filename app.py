@@ -95,7 +95,10 @@ retrieval_prompt = PromptTemplate(
 3. اجعل إجابتك قصيرة وعملية — استخدم خطوات مرقّمة وأيقونات عند الحاجة.
 4. لا تختلق معلومات غير صحيحة.
 5. بعد كل إجابة، اقترح سؤال متابعة واحد مختصر يتعلق بنفس الموضوع.
-6. أجب بنفس لغة المستخدم (عربي أو إنجليزي).
+6. 6. CRITICAL: Detect the language of the user's question first.
+   - If the question is in Arabic → your entire response must be in Arabic only.
+   - If the question is in English → your entire response must be in English only.
+   - Never mix Arabic and English in the same answer.
 7. إذا لم تعرف الإجابة، قل: "لا توجد معلومات كافية حول هذا الموضوع في النظام."
  
 معلومات مرجعية عن Madar:
