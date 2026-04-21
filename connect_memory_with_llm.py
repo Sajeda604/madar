@@ -1,4 +1,3 @@
-
 import os
 from dotenv import load_dotenv
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -42,7 +41,14 @@ def build_rag_chain():
     )
 
     prompt = ChatPromptTemplate.from_messages([
-        ("system", "أنت مساعد ذكي لنظام مدار. أجب بناءً على السياق التالي فقط:\n\n{context}"),
+        ("system", """You are a smart assistant for the Madar system.
+Answer ONLY based on the following context.
+CRITICAL LANGUAGE RULE:
+- If the user's question is in Arabic → answer in Arabic only.
+- If the user's question is in English → answer in English only, EVEN IF the context is in Arabic.
+- Never mix languages in the same response.
+Context:
+{context}"""),
         ("human", "{input}"),
     ])
 
