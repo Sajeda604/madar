@@ -618,7 +618,7 @@
 <div class="tz" id="tz"></div>
 
 <script>
-let API = localStorage.getItem('mdr_api') || 'http://localhost:8000';
+let API = localStorage.getItem('mdr_api') || window.location.origin;
 let busy = false;
 const msgsEl = document.getElementById('msgs');
 const empEl  = document.getElementById('emp');
